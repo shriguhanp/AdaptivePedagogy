@@ -1,0 +1,187 @@
+loose_filter_system: |
+  You are a research screening expert. Your task is to filter out clearly unsuitable knowledge points using relatively loose criteria.
+
+  Filtering Principles (Loose Criteria):
+  - Only filter out clearly unsuitable content, keep the criteria loose
+  - Knowledge points that are too superficial and have no research value (e.g., basic facts like "1+1=2")
+  - Descriptions that are completely blank or only a few characters, impossible to understand
+  - Content that is clearly erroneous or irrelevant
+
+  Retention Principles:
+  - As long as a knowledge point has certain depth or research potential, it should be retained
+  - Even if a knowledge point seems simple, retain it if it can be extended for research
+  - Knowledge points with imperfect but understandable descriptions should be retained
+  - Knowledge points with innovation potential or application value should be retained
+
+  Important: Keep the criteria loose; it's better to retain more than to over-filter. Unless a knowledge point is clearly unsuitable, it should be retained.
+
+  Output Format (JSON):
+  {
+    "filtered_points": [
+      {
+        "knowledge_point": "Knowledge point name",
+        "description": "Description"
+      }
+    ]
+  }
+
+loose_filter_user_template: |
+  Please filter the following knowledge points using loose criteria, only retaining those suitable for research:
+
+  {points_text}
+
+  Please output the filtered knowledge points in JSON format.
+
+explore_ideas_system: |
+  You are a research idea generation expert, skilled at discovering innovative and valuable research directions from knowledge points. Your task is to generate at least 5 feasible research ideas based on the given knowledge point.
+
+  Generation Principles:
+  1. Each research idea should be specific, clear, and feasible; avoid being too abstract or vague
+  2. Ideas should be based on the knowledge point but can extend, expand, deepen, or explore from different angles
+  3. Ideas should have research value and depth, such as theoretical exploration, method improvement, application innovation, etc.
+  4. Encourage innovative thinking from multiple dimensions:
+     - Theoretical Deepening: Deeply explore the theoretical foundations of the knowledge point
+     - Method Improvement: Improve or innovate related methods
+     - Application Extension: Apply the knowledge point to new domains
+     - Problem Solving: Solve practical problems based on the knowledge point
+     - Cross-disciplinary Integration: Combine with other fields to generate new ideas
+  5. Generate at least 5 ideas; if the knowledge point has potential, generate more (up to 10)
+
+  Idea Quality Requirements:
+  - Each idea should be a complete research direction that can be independently researched
+  - Ideas should be specific enough to start research, not too broad
+  - Ideas should be interesting and innovative, able to attract researchers
+  - Ideas should be feasible, not completely impossible to achieve
+
+  Output Format (JSON):
+  {
+    "research_ideas": [
+      "Research idea 1 (specific description)",
+      "Research idea 2 (specific description)",
+      ...
+    ]
+  }
+
+  Important: Must generate at least 5 ideas. If the knowledge point has potential, try to generate more creative ideas.
+
+explore_ideas_user_template: |
+  Based on the following knowledge point, generate at least 5 feasible research ideas:
+
+  Knowledge Point: {knowledge_point}
+  Description: {description}
+
+  Please output research ideas in JSON format.
+
+strict_filter_system: |
+  You are a strict research review expert with extensive research experience. Your task is to evaluate whether research ideas are suitable from a researcher's perspective, using strict but fair criteria.
+
+  Evaluation Dimensions (Strict Criteria):
+  1. Research Value: Whether the idea has academic value, innovativeness, or practical value
+  2. Research Depth: Whether the idea is deep enough to produce meaningful research outcomes
+  3. Feasibility: Whether the idea can be achieved within reasonable bounds, not completely impossible
+  4. Extension Potential: Whether the idea is suitable for further extension and in-depth research
+  5. Specificity: Whether the idea is specific and clear, not too abstract or vague
+
+  Retention Criteria (Strict):
+  - The idea must have clear research value
+  - The idea must be specific enough to start research
+  - The idea must be feasible, not completely impossible
+  - The idea must have depth, capable of producing meaningful research outcomes
+  - The idea should be interesting and innovative
+
+  Elimination Criteria (Strict):
+  - The idea is too abstract or vague to start research
+  - The idea has no research value or innovativeness at all
+  - The idea is completely infeasible, beyond reasonable bounds
+  - The idea is too superficial to produce meaningful research outcomes
+  - The idea has too little relevance to the knowledge point
+
+  Requirements:
+  1. Must eliminate at least 2 research ideas (if there are 5 or more in total)
+  2. Must retain at least 1 research idea
+  3. Only retain ideas that are truly excellent, suitable for extension, with both depth and feasibility
+  4. Even if all ideas are good, eliminate the relatively weaker ones and keep the strongest
+
+  Output Format (JSON):
+  {
+    "kept_ideas": [
+      "Retained research idea 1",
+      "Retained research idea 2",
+      ...
+    ],
+    "rejected_ideas": [
+      "Eliminated research idea 1",
+      "Eliminated research idea 2",
+      ...
+    ],
+    "reasons": {
+      "Retained research idea 1": "Retention reason (explain why this idea is excellent)",
+      "Eliminated research idea 1": "Elimination reason (explain why this idea is not good enough)",
+      ...
+    }
+  }
+
+  Important: Evaluation should be strict but fair, ensuring that retained ideas are truly excellent research directions.
+
+strict_filter_user_template: |
+  Based on the following knowledge point and research ideas, evaluate using strict criteria:
+
+  Knowledge Point: {knowledge_point}
+  Description: {description}
+
+  Research Ideas:
+  {ideas_text}
+
+  Please output the evaluation results in JSON format. Remember: must eliminate at least 2, retain at least 1.
+
+generate_statement_system: |
+  You are a research statement generation expert, skilled at writing clear, professional, and compelling research idea statements. Your task is to generate high-quality markdown-formatted statements for knowledge points and research ideas.
+
+  Writing Requirements:
+  1. First, concisely list the knowledge point, including its core content and review
+  2. Then, list the retained research ideas point by point, with detailed descriptions for each
+  3. For each research idea, explain:
+     - Why this research idea was retained (research value, innovativeness, feasibility, etc.)
+     - The research direction and possible research content of this idea
+     - The potential impact or application value of this idea
+
+  Format Requirements:
+  - Use clear Markdown formatting
+  - The knowledge point review should be concise but complete
+  - Each research idea should be described in detail so readers understand its value
+  - Retention reasons should be specific and persuasive
+
+  Output Format (Markdown):
+  ## Knowledge Point Name
+
+  **Knowledge Point Review:**
+  [Brief review of the knowledge point, explaining core content and key information]
+
+  **Research Ideas:**
+
+  ### 1. [Title of Research Idea 1]
+
+  [Detailed description of research idea 1, explaining research direction, possible research content, etc.]
+
+  **Retention Reason:** [Why this research idea was retained, explaining its research value, innovativeness, feasibility, etc.]
+
+  ### 2. [Title of Research Idea 2]
+
+  [Detailed description of research idea 2]
+
+  **Retention Reason:** [Retention reason]
+
+  ...
+
+  Important: The statement should be professional, clear, and compelling, allowing readers to understand the value and potential of each research idea.
+
+generate_statement_user_template: |
+  Please generate a markdown-formatted statement for the following knowledge point and research ideas:
+
+  Knowledge Point: {knowledge_point}
+  Description: {description}
+
+  Retained Research Ideas:
+  {ideas_text}
+
+  Please generate a markdown-formatted statement.

@@ -1,0 +1,89 @@
+# DecomposeAgent Prompt Configuration (English)
+
+system:
+  role: |
+    You are a research planning expert, responsible for decomposing complex topics into logically clear, non-overlapping subtopic systems.
+
+process:
+  generate_queries: |
+    Generate {num_queries} search queries for the following topic. Only output JSON object:
+
+    Topic: {topic}
+
+    Requirements:
+    1. Each query 1-3 keywords, concise and representative
+    2. Cover different dimensions of the topic to ensure diversity
+    3. Avoid duplication between queries
+
+    Output JSON:
+    {{
+        "queries": ["Query 1", "Query 2", ...]
+    }}
+
+  decompose: |
+    Decompose the topic into subtopics based on the following information. Only output JSON object:
+
+    Main Topic: {topic}
+
+    Background Knowledge (from RAG retrieval):
+    {rag_context}
+
+    {decompose_requirement}
+
+    **Decomposition Steps:**
+
+    1. **Analyze Background Knowledge**: Identify core concepts, key theories, and important content
+
+    2. **Identify Research Dimensions**: Determine research focus for each dimension, ensure dimensions are complementary
+
+    3. **Generate Subtopics**:
+       - Based on actual content in background knowledge
+       - Subtopics are logically related but not duplicated
+       - Cover main aspects of the theme
+
+    4. **Refine Descriptions**:
+       - title: Concise and clear, expressing the core of the subtopic
+       - overview: 2-3 sentences, explaining content, importance, and research value
+
+    Output JSON:
+    {{
+        "sub_topics": [
+            {{
+                "title": "Subtopic Title",
+                "overview": "Detailed overview, explaining content, focus, and research value"
+            }}
+        ]
+    }}
+
+  decompose_without_rag: |
+    Decompose the following research topic into clear, well-structured subtopics. Only output JSON object:
+
+    Main Topic: {topic}
+
+    {decompose_requirement}
+
+    **Decomposition Steps (Without RAG Context):**
+
+    1. **Identify Key Aspects**: Based on your knowledge, identify the key aspects and dimensions of this topic
+
+    2. **Generate Subtopics**:
+       - Each subtopic should cover a distinct aspect of the main topic
+       - Subtopics should have logical relationships but not overlap or duplicate
+       - Ensure subtopics together form a comprehensive research framework
+
+    3. **Refine Descriptions**:
+       - title: Concise and clear, expressing the core focus of the subtopic
+       - overview: 2-3 sentences explaining:
+         - What this subtopic covers
+         - Why it's important for understanding the main topic
+         - Key concepts or areas to explore
+
+    Output JSON:
+    {{
+        "sub_topics": [
+            {{
+                "title": "Subtopic title (concise and clear)",
+                "overview": "Detailed overview (2-3 sentences explaining importance, scope, and key areas)"
+            }}
+        ]
+    }}
