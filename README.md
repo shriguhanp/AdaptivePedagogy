@@ -4,8 +4,6 @@
 AdaptiveX is an **AI-powered adaptive learning platform** designed to solve the problem of one-size-fits-all education.  
 It personalizes learning content, pace, and assessments in real time based on individual learner behavior and performance.
 
-Built as part of **Problem Statement EDU001 – AI-Driven Adaptive Pedagogy Engine**, AdaptiveX focuses on *how students learn*, not just *what they learn*.
-
 ---
 
 ## 🔍 Problem Statement
