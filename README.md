@@ -126,5 +126,5 @@ It combines **high innovation** with **real-world feasibility**, making it scala
 ## 🚀 Getting Started
 
 ```bash
-git clone https://github.com/your-username/AdaptivePedagogy.git
+git clone https://github.com/shriguhanp/AdaptivePedagogy.git
 cd AdaptivePedagogy
